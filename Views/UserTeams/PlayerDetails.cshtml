@@ -1,0 +1,79 @@
+﻿@model BasketballWebApp.Models.Players
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Players</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ppg)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ppg)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Apg)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Apg)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rpg)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rpg)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GamesPlayed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GamesPlayed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Players" asp-route-id="@Model.TeamId">Back to Team Players</a>
+</div>
+<div>
+    <a asp-action="AddPlayer" asp-route-id="@Model.PlayerId">Add Player</a>
+</div>
+<div>
+    <a asp-action="RemovePlayer" asp-route-id="@Model.PlayerId">Remove Player</a>
+</div>
+
+

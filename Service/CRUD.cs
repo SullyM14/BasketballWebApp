@@ -43,6 +43,26 @@ namespace BasketballBusinessLayer
             return player;
         }
 
+        public IQueryable<UserTeams> AllUserTeams()
+        {
+            var fantasyTeam = _context.UserTeams.Include(u => u.User).Where(ut => ut.UserId ==1);
+            return fantasyTeam;
+        }
+
+        public IQueryable<Players> RetrieveUserTeamsPlayers(int? id)
+        {
+            //var fantasyPlayers = _context.UserTeamPlayers
+            //                .Include(u => u.Player).Include(u => u.UserTeam)
+            //                .Where(ut => ut.UserTeamId == id);
+
+
+            var fantasyPlayers = from uTeamPlayers in _context.UserTeamPlayers.Include(ut => ut.UserTeam).Include(p => p.Player)
+                                 where (uTeamPlayers.UserTeamId == id)
+                                 select uTeamPlayers.Player;
+
+            return fantasyPlayers;
+        }
+
     }
 }
 //        public decimal ResetBudget()
@@ -76,25 +96,7 @@ namespace BasketballBusinessLayer
 
 
 
-//        public List<Players> RetrieveUserTeamsPlayers(object selectedItem)
-//        {
-//            using(var db = new BasketballProjectContext())
-//            {
-//                var users =
-//                    from u in db.Users
-//                    where u.UserId == SelectedUser.UserId
-//                    select u;
-//                SelectedUser = users.FirstOrDefault();
-//                setSelectedUserTeam(selectedItem);
-
-//                var fantasyPlayers =
-//                     from uTeamPlayers in db.UserTeamPlayers.Include(ut => ut.UserTeam).Include(p => p.Player)
-//                     where (uTeamPlayers.UserTeam.UserId == SelectedUser.UserId) && (uTeamPlayers.UserTeamId == SelectedUserTeam.UserTeamId)
-//                     select uTeamPlayers.Player;
-
-//                return fantasyPlayers.ToList();
-//            }
-//        }
+//      
 
 //        public void SetSelectedPlayer(object selectedItem)
 //        {

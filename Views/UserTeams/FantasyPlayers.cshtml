@@ -1,0 +1,84 @@
+﻿@model IEnumerable<BasketballWebApp.Models.Players>
+
+@{
+    ViewData["Title"] = "FantasyPlayers";
+}
+
+<h1>Players</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ppg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rpg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GamesPlayed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ppg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rpg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GamesPlayed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="PlayerDetails" asp-route-id="@item.PlayerId">View Player Details</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

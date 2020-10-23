@@ -11,5 +11,9 @@ namespace BasketballWebApp.Service
         IOrderedQueryable<Nbateams> RetrieveNbaTeams();
         IOrderedQueryable<Players> RetrieveTeamPlayers(int? id);
         Task<Players> RetrievePlayerDetails(int? id);
+        IQueryable<UserTeams> AllUserTeams();
+        IQueryable<Players> RetrieveUserTeamsPlayers(int? id);
+
+
     }
 }
