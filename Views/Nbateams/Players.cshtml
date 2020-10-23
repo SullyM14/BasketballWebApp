@@ -74,9 +74,6 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Team.TeamName)
-            </td>
-            <td>
                 <a asp-action="PlayerDetails" asp-route-id="@item.PlayerId">View Player Details</a> |
             </td>
         </tr>

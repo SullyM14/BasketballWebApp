@@ -9,7 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BasketballWebApp.Models;
+using BasketballWebApp.Service;
 using Microsoft.EntityFrameworkCore;
+using BasketballBusinessLayer;
 
 namespace BasketballWebApp
 {
@@ -28,6 +30,8 @@ namespace BasketballWebApp
             services.AddControllersWithViews();
             services.AddDbContext<BasketballProjectContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("BasketballProjectContext")));
+            services.AddScoped<ICRUD,CRUD>();
+
         }
     
 

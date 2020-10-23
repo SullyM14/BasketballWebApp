@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BasketballWebApp.Models
 {
@@ -11,6 +13,8 @@ namespace BasketballWebApp.Models
         }
 
         public int NbateamId { get; set; }
+
+        [Display(Name = "Team Name")]
         public string TeamName { get; set; }
         public int? Wins { get; set; }
         public int? Losses { get; set; }
