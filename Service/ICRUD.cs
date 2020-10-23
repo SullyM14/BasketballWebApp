@@ -13,7 +13,8 @@ namespace BasketballWebApp.Service
         Task<Players> RetrievePlayerDetails(int? id);
         IQueryable<UserTeams> AllUserTeams();
         IQueryable<Players> RetrieveUserTeamsPlayers(int? id);
+        Task<UserTeams> RetrieveUserTeamsDetails(int? id);
 
-
+        void RemoveUserTeam(int? id);
     }
 }

@@ -60,5 +60,30 @@ namespace BasketballWebApp.Controllers
         }
 
 
+        // GET: Userteams/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var userTeam = await _crud.RetrieveUserTeamsDetails(id);
+            if (userTeam == null)
+            {
+                return NotFound();
+            }
+
+            return View(userTeam);
+        }
+
+        // POST: Userteams/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _crud.RemoveUserTeam(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

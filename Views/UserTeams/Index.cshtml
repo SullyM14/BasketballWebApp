@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.User.FirstName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.UserTeamId">Edit</a> |
+                @*<a asp-action="Edit" asp-route-id="@item.UserTeamId">Edit</a> |*@
                 <a asp-action="FantasyPlayers" asp-route-id="@item.UserTeamId">View Fantasy Team</a> |
-                @*<a asp-action="Delete" asp-route-id="@item.UserTeamId">Delete</a>*@
+                <a asp-action="Delete" asp-route-id="@item.UserTeamId">Delete</a>
             </td>
         </tr>
 }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using BasketballWebApp.Models;
+﻿using BasketballWebApp.Models;
 using BasketballWebApp.Service;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BasketballBusinessLayer
 {
@@ -18,7 +13,7 @@ namespace BasketballBusinessLayer
         public Players SelectedPlayers { get; set; }
         public Users SelectedUser { get; set; }
 
-        BasketballProjectContext _context;
+        private BasketballProjectContext _context;
 
         public CRUD(BasketballProjectContext context)
         {
@@ -45,7 +40,7 @@ namespace BasketballBusinessLayer
 
         public IQueryable<UserTeams> AllUserTeams()
         {
-            var fantasyTeam = _context.UserTeams.Include(u => u.User).Where(ut => ut.UserId ==1);
+            var fantasyTeam = _context.UserTeams.Include(u => u.User).Where(ut => ut.UserId == 1);
             return fantasyTeam;
         }
 
@@ -55,7 +50,6 @@ namespace BasketballBusinessLayer
             //                .Include(u => u.Player).Include(u => u.UserTeam)
             //                .Where(ut => ut.UserTeamId == id);
 
-
             var fantasyPlayers = from uTeamPlayers in _context.UserTeamPlayers.Include(ut => ut.UserTeam).Include(p => p.Player)
                                  where (uTeamPlayers.UserTeamId == id)
                                  select uTeamPlayers.Player;
@@ -63,8 +57,30 @@ namespace BasketballBusinessLayer
             return fantasyPlayers;
         }
 
+        public async Task<UserTeams> RetrieveUserTeamsDetails(int? id)
+        {
+            var teamDetails = await _context.UserTeams.FirstOrDefaultAsync(ut => ut.UserTeamId == id);
+            return teamDetails;
+        }
+
+        public async void RemoveUserTeam(int? id)
+        {
+            //Find and Delete the User Team players in the UserTeamPlayers database
+            var userTeamPlayers = _context.UserTeamPlayers.Where(ut => ut.UserTeamId == id);
+            if (userTeamPlayers != null)
+            {
+                _context.UserTeamPlayers.RemoveRange(userTeamPlayers);
+                await _context.SaveChangesAsync();
+            }
+
+            //Find and Delete the User Team
+            var userTeam = await _context.UserTeams.FindAsync(id);
+            _context.UserTeams.Remove(userTeam);
+            await _context.SaveChangesAsync();
+        }
     }
 }
+
 //        public decimal ResetBudget()
 //        {
 //            using (var db = new BasketballProjectContext())
@@ -94,9 +110,7 @@ namespace BasketballBusinessLayer
 //            }
 //        }
 
-
-
-//      
+//
 
 //        public void SetSelectedPlayer(object selectedItem)
 //        {
@@ -119,12 +133,10 @@ namespace BasketballBusinessLayer
 //        {
 //            using(var db = new BasketballProjectContext())
 //            {
-              
 //                SetSelectedPlayer(selectedItem);
 
-
 //                var numberOfPlayersInTeam = RetrieveUserTeamsPlayers(SelectedUserTeam).Count(); // Get all players in team
-               
+
 //                //Find the user team in the database
 //                var userTeam1 =
 //                    from u in db.UserTeams
@@ -150,7 +162,7 @@ namespace BasketballBusinessLayer
 //                        {
 //                            //Update budget and then add the player
 //                            userTeam.Budget -= SelectedPlayers.Price;
-//                            db.UserTeams.Update(userTeam);                 
+//                            db.UserTeams.Update(userTeam);
 //                            db.Add(new UserTeamPlayers { UserTeamId = SelectedUserTeam.UserTeamId, PlayerId = SelectedPlayers.PlayerId });
 //                            db.SaveChanges();
 //                            setSelectedUserTeam(userTeam);
@@ -196,14 +208,13 @@ namespace BasketballBusinessLayer
 //            using (var db = new BasketballProjectContext())
 //            {
 //                //Check if the player is in the team, if they are then find the specfic player
-//                if (IsPlayerInTeam(SelectedPlayers)) 
+//                if (IsPlayerInTeam(SelectedPlayers))
 //                {
 //                    var selectedPlayer =
 //                         from UserTeamPlayers in db.UserTeamPlayers
 //                         where (UserTeamPlayers.UserTeamId == SelectedUserTeam.UserTeamId) && (UserTeamPlayers.PlayerId == SelectedPlayers.PlayerId)
 //                         select UserTeamPlayers;
-                        
-                    
+
 //                    //Update the budget and then remove the player
 //                    SelectedUserTeam.Budget += SelectedPlayers.Price;
 //                    db.UserTeams.Update(SelectedUserTeam);
@@ -225,7 +236,7 @@ namespace BasketballBusinessLayer
 //                    select u;
 
 //                SelectedUser = users.FirstOrDefault();
-                
+
 //                //Add the user team and then update the selectedTeam to be the new team created
 //                var userTeam = new UserTeams { UserId = SelectedUser.UserId, Budget = 100, TeamName = text};
 //                db.UserTeams.Add(userTeam);
