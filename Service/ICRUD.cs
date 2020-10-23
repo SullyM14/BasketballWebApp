@@ -9,5 +9,7 @@ namespace BasketballWebApp.Service
     public interface ICRUD
     {
         IOrderedQueryable<Nbateams> RetrieveNbaTeams();
+        IOrderedQueryable<Players> RetrieveTeamPlayers(int? id);
+        Task<Players> RetrievePlayerDetails(int? id);
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using BasketballWebApp.Models;
 using BasketballWebApp.Service;
 using Microsoft.EntityFrameworkCore;
@@ -24,12 +25,24 @@ namespace BasketballBusinessLayer
             _context = context;
         }
 
-
         public IOrderedQueryable<Nbateams> RetrieveNbaTeams()
         {
             var teams = _context.Nbateams.OrderByDescending(t => t.Wins);
             return teams;
         }
+
+        public IOrderedQueryable<Players> RetrieveTeamPlayers(int? id)
+        {
+            var players = _context.Players.Where(p => p.TeamId == id).OrderByDescending(p => p.Price);
+            return players;
+        }
+
+        public async Task<Players> RetrievePlayerDetails(int? id)
+        {
+            var player = await _context.Players.FirstOrDefaultAsync(p => p.PlayerId == id);
+            return player;
+        }
+
     }
 }
 //        public decimal ResetBudget()
@@ -61,19 +74,7 @@ namespace BasketballBusinessLayer
 //            }
 //        }
 
-//        public List<Players> RetrieveTeamPlayers(object selectedItem)
-//        {
-//            using (var db = new BasketballProjectContext())
-//            {
-//                SelectedNbaTeam = (Nbateams)selectedItem;
-//                var players =
-//                    from p in db.Players
-//                    where p.TeamId == SelectedNbaTeam.NbateamId
-//                    select p;
 
-//                return players.ToList();
-//            }
-//        }
 
 //        public List<Players> RetrieveUserTeamsPlayers(object selectedItem)
 //        {

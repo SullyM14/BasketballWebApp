@@ -26,48 +26,37 @@ namespace BasketballWebApp.Controllers
             return View(await teams);
         }
 
-        // GET: Nbateams/Details/5s
-        public async Task<IActionResult> Details(int? id)
+        //GET: Nbateams/Players/5s
+        public async Task<IActionResult> Players(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var players = _crud.RetrieveTeamPlayers(id);
+            if (players == null)
+            {
+                return NotFound();
+            }
+            return View(await players.ToListAsync());
+        }
+
+       // GET: Nbateams/PlayerDetails/5s
+        public async Task<IActionResult> PlayerDetails(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var nbateams = await _crud.RetrieveNbaTeams()
-                .FirstOrDefaultAsync(m => m.NbateamId == id);
-            if (nbateams == null)
+            var player = await _crud.RetrievePlayerDetails(id);
+            if (player == null)
             {
                 return NotFound();
             }
 
-            return View(nbateams);
+            return View(player);
         }
-
-        //GET: Nbateams/Players/5s
-        //public async Task<IActionResult> Players(int? id)
-        //{
-        //    var players = _context.Players.Where(p => p.TeamId == id).OrderByDescending(p=>p.Price);
-        //    return View(await players.ToListAsync());
-        //}
-
-        // GET: Nbateams/PlayerDetails/5s
-        //public async Task<IActionResult> PlayerDetails(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var player = await _context.Players
-        //        .FirstOrDefaultAsync(p=>p.PlayerId == id);
-        //    if (player == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(player);
-        //}
 
         //private bool NbateamsExists(int id)
         //{
