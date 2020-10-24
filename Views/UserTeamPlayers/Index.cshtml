@@ -1,0 +1,92 @@
+﻿@model IEnumerable<BasketballWebApp.Models.UserTeamPlayers>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+   // <a asp-action="Create" asp-route-id="">Create New</a>
+    @*<a asp-action="Create" asp-route-id="@model.UserTeamID">Create New</a>*@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model=> model.Player.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.Ppg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.Apg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.Rpg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.GamesPlayed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserTeamId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.Ppg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.Apg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.Rpg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.GamesPlayed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserTeamId)
+                </td>
+                <td>
+                    <a asp-action="Create" asp-route-id="@item.UserTeamId">Create New</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

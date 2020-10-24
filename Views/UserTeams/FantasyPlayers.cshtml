@@ -7,6 +7,7 @@
 <h1>Players</h1>
 
 
+
 <table class="table">
     <thead>
         <tr>
@@ -76,6 +77,9 @@
                 </td>
                 <td>
                     <a asp-action="PlayerDetails" asp-route-id="@item.PlayerId">View Player Details</a> |
+                </td>
+                <td>
+                    <a asp-controller="UserTeamPlayers" asp-action="Index" asp-route-id="@item.PlayerId">Add More Players</a> |
                 </td>
             </tr>
         }

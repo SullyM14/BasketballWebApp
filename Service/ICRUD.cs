@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,11 +13,14 @@ namespace BasketballWebApp.Service
         IOrderedQueryable<Players> RetrieveTeamPlayers(int? id);
         Task<Players> RetrievePlayerDetails(int? id);
         IQueryable<UserTeams> AllUserTeams();
-        IQueryable<Players> RetrieveUserTeamsPlayers(int? id);
+        IQueryable<UserTeamPlayers> RetrieveUserTeamsPlayers(int? id);
         Task<UserTeams> RetrieveUserTeamsDetails(int? id);
 
         Task RemoveUserTeam(int? id);
         Task CreateNewTeam(UserTeams userTeam);
-
+        Task AddPlayer(int? id);
+        int GetUserTeamID(int? id);
+        IEnumerable<Players> RetrievePlayers();
+        public IEnumerable<UserTeams> RetrieveUserTeam(int? id);
     }
 }

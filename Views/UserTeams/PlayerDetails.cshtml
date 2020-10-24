@@ -70,10 +70,10 @@
     <a asp-action="Players" asp-route-id="@Model.TeamId">Back to Team Players</a>
 </div>
 <div>
-    <a asp-action="AddPlayer" asp-route-id="@Model.PlayerId">Add Player</a>
+    <a asp-controller="UserTeams" asp-action="AddPlayer" asp-route-id="@Model.PlayerId">Add Player</a>
 </div>
 <div>
-    <a asp-action="RemovePlayer" asp-route-id="@Model.PlayerId">Remove Player</a>
+    <a asp-controller="UserTeams" asp-action="RemovePlayer" >Remove Player</a>
 </div>
 
 

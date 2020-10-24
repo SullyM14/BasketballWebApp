@@ -1,6 +1,8 @@
 ﻿using BasketballWebApp.Models;
 using BasketballWebApp.Service;
+using Microsoft.Data.SqlClient.Server;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -44,7 +46,7 @@ namespace BasketballBusinessLayer
             return fantasyTeam;
         }
 
-        public IQueryable<Players> RetrieveUserTeamsPlayers(int? id)
+        public IQueryable<UserTeamPlayers> RetrieveUserTeamsPlayers(int? id)
         {
             //var fantasyPlayers = _context.UserTeamPlayers
             //                .Include(u => u.Player).Include(u => u.UserTeam)
@@ -53,7 +55,7 @@ namespace BasketballBusinessLayer
             SelectedUserTeam = _context.UserTeams.Where(ut => ut.UserTeamId == id).FirstOrDefault();
             var fantasyPlayers = from uTeamPlayers in _context.UserTeamPlayers.Include(ut => ut.UserTeam).Include(p => p.Player)
                                  where (uTeamPlayers.UserTeamId == id)
-                                 select uTeamPlayers.Player;
+                                 select uTeamPlayers;
 
             return fantasyPlayers;
         }
@@ -73,7 +75,7 @@ namespace BasketballBusinessLayer
             //var userTeamPlayers = _context.UserTeamPlayers.Where(ut => ut.UserTeamId == id);
             //_context.UserTeamPlayers.RemoveRange(userTeamPlayers);
             // await _context.SaveChangesAsync();
-            
+
 
             ////Find and Delete the User Team
             //var userTeam = await _context.UserTeams.Where(ut=>ut.UserTeamId == id).FirstOrDefaultAsync();
@@ -88,6 +90,68 @@ namespace BasketballBusinessLayer
             await _context.SaveChangesAsync();
         }
 
+        public async Task AddPlayer(int? id)
+        {
+            var player = _context.Players.Where(p => p.PlayerId == id).FirstOrDefault();
+
+
+            var numberOfPlayersInTeam = RetrieveUserTeamsPlayers(SelectedUserTeam.UserTeamId).Count(); // Get all players in team
+            //Check if the player is in the team
+            var searchForPlayerInTeam = _context.UserTeamPlayers.Where(ut => ut.UserTeamId == SelectedUserTeam.UserTeamId).Where(ut => ut.PlayerId == id);
+            var isPlayerAlreadyInTeam = searchForPlayerInTeam.Count();
+
+            //Ensure the player has less than 6 players in their team and then the player is in budget
+            if (isPlayerAlreadyInTeam != 1)
+            {
+                if (numberOfPlayersInTeam < 6)
+                    if (CheckBudget() == true)
+                    {
+                        var newPlayer = new UserTeamPlayers { PlayerId = (int)id, UserTeamId = SelectedUserTeam.UserTeamId };
+                        //Update budget and then add the player
+                        SelectedUserTeam.Budget -= player.Price;
+                        _context.UserTeams.Update(SelectedUserTeam);
+                        await _context.SaveChangesAsync();
+
+                        _context.UserTeamPlayers.Add(newPlayer);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        throw new OutOfBudgetException();
+                    }
+                else
+                {
+                    throw new TooManyPlayerException();
+                }
+            }
+        }
+
+        public bool CheckBudget()
+        {
+            if (SelectedPlayers.Price <= SelectedUserTeam.Budget)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int GetUserTeamID(int? id)
+        {
+            return (int)id;
+        }
+
+        public IEnumerable<Players> RetrievePlayers()
+        {
+            return _context.Players.ToList();
+        }
+
+        public IEnumerable<UserTeams> RetrieveUserTeam(int? id)
+        {
+            return _context.UserTeams.Where(ut => ut.UserTeamId == id).ToList();
+        }
     }
 }
 
