@@ -34,6 +34,7 @@ namespace BasketballWebApp.Controllers
             {
                 return NotFound();
             }
+            
             var FantasyPlayers = _crud.RetrieveUserTeamsPlayers(id);
             if (FantasyPlayers == null)
             {
@@ -80,10 +81,33 @@ namespace BasketballWebApp.Controllers
         // POST: Userteams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int? id)
         {
             _crud.RemoveUserTeam(id);
             return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
         }
+
+        // GET: Userteams/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Userteams/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("UserTeamId, UserId, TeamName, Budget")] UserTeams userTeam)
+        {
+            if (ModelState.IsValid)
+            {
+                await _crud.CreateNewTeam(userTeam);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(userTeam);
+        }
+
     }
 }

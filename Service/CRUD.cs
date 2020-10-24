@@ -50,6 +50,7 @@ namespace BasketballBusinessLayer
             //                .Include(u => u.Player).Include(u => u.UserTeam)
             //                .Where(ut => ut.UserTeamId == id);
 
+            SelectedUserTeam = _context.UserTeams.Where(ut => ut.UserTeamId == id).FirstOrDefault();
             var fantasyPlayers = from uTeamPlayers in _context.UserTeamPlayers.Include(ut => ut.UserTeam).Include(p => p.Player)
                                  where (uTeamPlayers.UserTeamId == id)
                                  select uTeamPlayers.Player;
@@ -63,21 +64,30 @@ namespace BasketballBusinessLayer
             return teamDetails;
         }
 
-        public async void RemoveUserTeam(int? id)
+        public async Task RemoveUserTeam(int? id)
         {
-            //Find and Delete the User Team players in the UserTeamPlayers database
-            var userTeamPlayers = _context.UserTeamPlayers.Where(ut => ut.UserTeamId == id);
-            if (userTeamPlayers != null)
-            {
-                _context.UserTeamPlayers.RemoveRange(userTeamPlayers);
-                await _context.SaveChangesAsync();
-            }
-
-            //Find and Delete the User Team
             var userTeam = await _context.UserTeams.FindAsync(id);
             _context.UserTeams.Remove(userTeam);
             await _context.SaveChangesAsync();
+            ////Find and Delete the User Team players in the UserTeamPlayers database
+            //var userTeamPlayers = _context.UserTeamPlayers.Where(ut => ut.UserTeamId == id);
+            //_context.UserTeamPlayers.RemoveRange(userTeamPlayers);
+            // await _context.SaveChangesAsync();
+            
+
+            ////Find and Delete the User Team
+            //var userTeam = await _context.UserTeams.Where(ut=>ut.UserTeamId == id).FirstOrDefaultAsync();
+            //_context.Remove<UserTeams>(userTeam);
+            //await _context.SaveChangesAsync();
         }
+
+
+        public async Task CreateNewTeam(UserTeams userTeam)
+        {
+            _context.Add(userTeam);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }
 
