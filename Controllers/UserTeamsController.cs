@@ -109,23 +109,23 @@ namespace BasketballWebApp.Controllers
             return View(userTeam);
         }
 
-        // POST: Userteams/AddPlayer/1
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddPlayer(int? id)
-        {
-            if (ModelState.IsValid)
-            {
-                await _crud.AddPlayer(id);
-                return RedirectToAction(nameof(Index));
-            }
-            //ViewData["PlayerId"] = new SelectList(_context.Players, "PlayerId", "FirstName", userTeamPlayers.PlayerId);
-            //ViewData["UserTeamId"] = new SelectList(_context.UserTeams, "UserTeamId", "TeamName", userTeamPlayers.UserTeamId);
-            var userTeam = _crud.AllUserTeams();
-            return RedirectToAction(nameof(Index));
-        }
+        //// POST: Userteams/AddPlayer/1
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AddPlayer(int? id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _crud.AddPlayer(id);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    //ViewData["PlayerId"] = new SelectList(_context.Players, "PlayerId", "FirstName", userTeamPlayers.PlayerId);
+        //    //ViewData["UserTeamId"] = new SelectList(_context.UserTeams, "UserTeamId", "TeamName", userTeamPlayers.UserTeamId);
+        //    var userTeam = _crud.AllUserTeams();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
     }
 }

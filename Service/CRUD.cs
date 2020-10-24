@@ -90,29 +90,29 @@ namespace BasketballBusinessLayer
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddPlayer(int? id)
+        public async Task AddPlayer(UserTeamPlayers userTeamPlayers)
         {
-            var player = _context.Players.Where(p => p.PlayerId == id).FirstOrDefault();
+            var player = _context.Players.Where(p => p.PlayerId == userTeamPlayers.PlayerId).FirstOrDefault();
+            var team = _context.UserTeams.Where(u => u.UserTeamId == userTeamPlayers.UserTeamId).FirstOrDefault();
 
-
-            var numberOfPlayersInTeam = RetrieveUserTeamsPlayers(SelectedUserTeam.UserTeamId).Count(); // Get all players in team
+            var numberOfPlayersInTeam = RetrieveUserTeamsPlayers(userTeamPlayers.UserTeamId).Count(); // Get all players in team
             //Check if the player is in the team
-            var searchForPlayerInTeam = _context.UserTeamPlayers.Where(ut => ut.UserTeamId == SelectedUserTeam.UserTeamId).Where(ut => ut.PlayerId == id);
+            var searchForPlayerInTeam = _context.UserTeamPlayers.Where(ut => ut.UserTeamId == userTeamPlayers.UserTeamId).Where(ut => ut.PlayerId == userTeamPlayers.PlayerId);
             var isPlayerAlreadyInTeam = searchForPlayerInTeam.Count();
 
             //Ensure the player has less than 6 players in their team and then the player is in budget
             if (isPlayerAlreadyInTeam != 1)
             {
                 if (numberOfPlayersInTeam < 6)
-                    if (CheckBudget() == true)
+                    if (CheckBudget(team.Budget, player.Price) == true)
                     {
-                        var newPlayer = new UserTeamPlayers { PlayerId = (int)id, UserTeamId = SelectedUserTeam.UserTeamId };
                         //Update budget and then add the player
-                        SelectedUserTeam.Budget -= player.Price;
-                        _context.UserTeams.Update(SelectedUserTeam);
+                        team.Budget = team.Budget - player.Price;
+                        _context.UserTeams.Where(ut => ut.UserTeamId == team.UserTeamId);
                         await _context.SaveChangesAsync();
 
-                        _context.UserTeamPlayers.Add(newPlayer);
+                        var newTeam = new UserTeamPlayers { PlayerId = player.PlayerId, UserTeamId = team.UserTeamId };
+                        _context.UserTeamPlayers.Add(newTeam);
                         await _context.SaveChangesAsync();
                     }
                     else
@@ -126,9 +126,9 @@ namespace BasketballBusinessLayer
             }
         }
 
-        public bool CheckBudget()
+        public bool CheckBudget(decimal budget, decimal price)
         {
-            if (SelectedPlayers.Price <= SelectedUserTeam.Budget)
+            if (price <= budget)
             {
                 return true;
             }

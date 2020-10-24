@@ -49,28 +49,27 @@ namespace BasketballWebApp.Controllers
         // GET: UserTeamPlayers/Create/5
         public IActionResult Create(int? id)
         {
-            ViewData["PlayerId"] = new SelectList(_crud.RetrievePlayers(), "PlayerId", "FirstName");
+            ViewData["PlayerId"] = new SelectList(_crud.RetrievePlayers(), "PlayerId", "FirstName", "LastName");
             ViewData["UserTeamId"] = new SelectList(_crud.RetrieveUserTeam(id), "UserTeamId", "TeamName");
             return View();
         }
 
-        //// POST: UserTeamPlayers/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("UserTeamId,PlayerId,Id")] UserTeamPlayers userTeamPlayers)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(userTeamPlayers);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["PlayerId"] = new SelectList(_context.Players, "PlayerId", "FirstName", userTeamPlayers.PlayerId);
-        //    ViewData["UserTeamId"] = new SelectList(_context.UserTeams, "UserTeamId", "TeamName", userTeamPlayers.UserTeamId);
-        //    return View(userTeamPlayers);
-        //}
+        // POST: UserTeamPlayers/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("UserTeamId,PlayerId,Id")] UserTeamPlayers userTeamPlayers)
+        {
+            if (ModelState.IsValid)
+            {
+                await _crud.AddPlayer(userTeamPlayers);
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["PlayerId"] = new SelectList(_crud.RetrievePlayers(), "PlayerId", "FirstName", "LastName");
+            ViewData["UserTeamId"] = new SelectList(_crud.RetrieveUserTeam(userTeamPlayers.UserTeamId), "UserTeamId", "TeamName");
+            return View(userTeamPlayers);
+        }
 
         //// GET: UserTeamPlayers/Edit/5
         //public async Task<IActionResult> Edit(int? id)
