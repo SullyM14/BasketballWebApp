@@ -4,6 +4,17 @@
     ViewData["Title"] = "Create";
 }
 
+<style>
+    * {
+        background-size: cover;
+        text-align: center;
+        color: white
+    }
+    a {
+        color: white;
+    }
+</style>
+
 <h1>Add Player to @ViewBag.UserTeamName</h1>
 
 <hr />
@@ -12,7 +23,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-               Budget: @Html.Label("Budget", (string)ViewBag.Budget)
+                Budget: @Html.Label("Budget", (string)ViewBag.Budget)
             </div>
             <div class="form-group">
                 <select asp-for="UserTeamId" class="form-control" asp-items="ViewBag.UserTeamId"></select>

@@ -83,6 +83,7 @@ namespace BasketballWebApp.Controllers
                 return NotFound();
             }
             ViewData["UserTeamName"] = _crud.RetrieveUserTeam(userTeamPlayers.UserTeamId).FirstOrDefault().TeamName;
+            ViewData["PlayerName"] = $"{userTeamPlayers.Player.FirstName} {userTeamPlayers.Player.LastName}";
             ViewData["UserTeamIdInt"] = userTeamPlayers.UserTeamId;
             return View(userTeamPlayers);
         }

@@ -4,6 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    * {
+        background-size: cover;
+        text-align: center;
+        color: white
+    }
+    a{
+        color:white;
+    }
+</style>
+
 <h1>NBA Teams</h1>
 
 
@@ -26,24 +37,25 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeamName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Wins)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Losses)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Conference)
-            </td>
-            <td>
-                <a asp-action="Players" asp-route-id="@item.NbateamId">View Players</a> |
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wins)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Losses)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Conference)
+                </td>
+                <td>
+                    <a asp-action="Players" asp-route-id="@item.NbateamId">View Players</a> 
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

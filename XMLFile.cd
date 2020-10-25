@@ -1,4 +1,114 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-	<Font Name="Segoe UI" Size="9" />
+  <Class Name="BasketballWebApp.Controllers.HomeController" Collapsed="true">
+    <Position X="1.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAIAAAAQAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballWebApp.Controllers.NbateamsController">
+    <Position X="1" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAMAAAAAgAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\NbateamsController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_crud" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BasketballWebApp.Controllers.UserTeamPlayersController">
+    <Position X="4" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAIAAAAEAAEAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\UserTeamPlayersController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_crud" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BasketballWebApp.Controllers.UserTeamsController">
+    <Position X="4" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAIAAAAEAAEAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\UserTeamsController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_crud" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BasketballWebApp.Models.UserTeams">
+    <Position X="0.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAABAAAAAAEAAAAAAgBAAAAAEAAAAAAAAAAgAA=</HashCode>
+      <FileName>Models\Customisations\CustomisationForUserTeams.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="UserTeamPlayers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BasketballWebApp.Models.Nbateams">
+    <Position X="9.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAEAAAAAAABAAAgAAAgAAAACAAAgAA=</HashCode>
+      <FileName>Models\Customisations\CustomiseNbaTeams.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballWebApp.Models.Players">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAEAAAQAAgAAkAEAAAAACAAAAAEAAEAIIBQAgAEg=</HashCode>
+      <FileName>Models\Customisations\CustomisePlayers.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Team" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="UserTeamPlayers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BasketballWebApp.Models.BasketballProjectContext">
+    <Position X="5.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAQAQAAAAAAAAAAAAFAAgAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\BasketballProjectContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballWebApp.Models.Users" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAQAAAAgABAAAAAACAAAAAAAAAAg=</HashCode>
+      <FileName>Models\Users.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballWebApp.Models.UserTeamPlayers">
+    <Position X="3.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAABAAAAAAAAAAAAAAABAAAAAAAAAAIAQAAAAA=</HashCode>
+      <FileName>Models\UserTeamPlayers.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Player" />
+      <Property Name="UserTeam" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BasketballBusinessLayer.CRUD" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAIQACAIBEAgAgGAAAAYBAAAAAIAAKgAAwEAAAA=</HashCode>
+      <FileName>Service\CRUD.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="BasketballWebApp.Service.ICRUD" Collapsed="true">
+    <Position X="6.5" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAAAEAAAgGAAAAYBAAAAAIAACgAAwEAAAA=</HashCode>
+      <FileName>Service\ICRUD.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

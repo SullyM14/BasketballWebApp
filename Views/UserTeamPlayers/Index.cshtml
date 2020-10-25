@@ -4,12 +4,22 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    * {
+        background-size: cover;
+        text-align: center;
+        color: white
+    }
+    a {
+        color: white;
+    }
+</style>
 <h1>@ViewBag.UserTeamName</h1>
 
-<p>
-    <a asp-action="Create" asp-route-id="@ViewBag.UserTeamIdInt">Add Players</a>
-    <div class="form-group" style="float:right">
-       Budget: @Html.Label("Budget", (string)ViewBag.Budget)
+<p style="display:inline">
+    <a class ="btn btn-success" style="float:right" asp-action="Create" asp-route-id="@ViewBag.UserTeamIdInt">Add New Player</a>
+    <div class="form-group" style="float:left">
+        Budget: @Html.Label("Budget", (string)ViewBag.Budget)
     </div>
 </p>
 
@@ -17,10 +27,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model=> model.Player.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Player.LastName)
+                Player Name
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Player.Age)
@@ -51,10 +58,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Player.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Player.LastName)
+                    @item.Player.ToString()
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Player.Age)

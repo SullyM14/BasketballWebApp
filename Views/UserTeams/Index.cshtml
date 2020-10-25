@@ -10,13 +10,22 @@
         text-align: center;
         color:white;
     }
+    a {
+        color: white;
+    }
 </style>
-<h1>Welcome Back to Fanatasy Basketball, @ViewBag.UserName</h1>
-<p>
-    <a asp-action="Create">Create New Fantasy Team</a>
-</p>
-<h1 style="text-align:center">Your Fantasy Teams</h1>
+<h1>Welcome Back to Fantasy Basketball, @ViewBag.UserName</h1>
+<br />
 
+@*<p>
+    <a asp-action="Create">Create New Fantasy Team</a>
+</p>*@
+
+
+<div style="display:inline">
+<h1 style="float:left">Your Fantasy Teams</h1>
+<a class="btn btn-success" style="float:right" asp-action="Create">Create New Fantasy Team</a>
+    </div>
 <table class="table">
     <thead>
         <tr>
@@ -45,7 +54,6 @@
                 @Html.DisplayFor(modelItem => item.User.FirstName)
             </td>
             <td>
-                @*<a asp-action="Edit" asp-route-id="@item.UserTeamId">Edit</a> |*@
                 <a asp-controller="UserTeamPlayers" asp-action="Index" asp-route-id="@item.UserTeamId">View Fantasy Team</a> |
                 <a asp-action="Delete" asp-route-id="@item.UserTeamId">Delete</a>
             </td>
