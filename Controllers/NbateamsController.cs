@@ -57,10 +57,5 @@ namespace BasketballWebApp.Controllers
 
             return View(player);
         }
-
-        //private bool NbateamsExists(int id)
-        //{
-        //    return _context.Nbateams.Any(e => e.NbateamId == id);
-        //}
     }
 }

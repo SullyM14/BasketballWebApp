@@ -27,41 +27,6 @@ namespace BasketballWebApp.Controllers
             return View(await fantasyTeam.ToListAsync());
         }
 
-
-        //GET: UserTeams/FantasyPlayers/5
-        public async Task<IActionResult> FantasyPlayers(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            
-            var FantasyPlayers = _crud.RetrieveUserTeamsPlayers(id);
-            if (FantasyPlayers == null)
-            {
-                return NotFound();
-            }
-            return View(await FantasyPlayers.ToListAsync());
-        }
-
-
-        // GET: Userteams/PlayerDetails/5s
-        public async Task<IActionResult> PlayerDetails(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var player = await _crud.RetrievePlayerDetails(id);
-            if (player == null)
-            {
-                return NotFound();
-            }
-            return View(player);
-        }
-
-
         // GET: Userteams/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -109,24 +74,5 @@ namespace BasketballWebApp.Controllers
             }
             return View(userTeam);
         }
-
-        //// POST: Userteams/AddPlayer/1
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> AddPlayer(int? id)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await _crud.AddPlayer(id);
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    //ViewData["PlayerId"] = new SelectList(_context.Players, "PlayerId", "FirstName", userTeamPlayers.PlayerId);
-        //    //ViewData["UserTeamId"] = new SelectList(_context.UserTeams, "UserTeamId", "TeamName", userTeamPlayers.UserTeamId);
-        //    var userTeam = _crud.AllUserTeams();
-        //    return RedirectToAction(nameof(Index));
-        //}
-
     }
 }

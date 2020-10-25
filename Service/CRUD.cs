@@ -68,21 +68,13 @@ namespace BasketballBusinessLayer
 
         public async Task RemoveUserTeam(int? id)
         {
-            var userTeam = await _context.UserTeams.FindAsync(id);
-            _context.UserTeams.Remove(userTeam);
+            var userTeamPlayers = _context.UserTeamPlayers.Where(ut => ut.UserTeamId == id).ToList();
+            var team = _context.UserTeams.Where(ut => ut.UserTeamId == id).FirstOrDefault();
+            _context.RemoveRange(userTeamPlayers);
             await _context.SaveChangesAsync();
-            ////Find and Delete the User Team players in the UserTeamPlayers database
-            //var userTeamPlayers = _context.UserTeamPlayers.Where(ut => ut.UserTeamId == id);
-            //_context.UserTeamPlayers.RemoveRange(userTeamPlayers);
-            // await _context.SaveChangesAsync();
-
-
-            ////Find and Delete the User Team
-            //var userTeam = await _context.UserTeams.Where(ut=>ut.UserTeamId == id).FirstOrDefaultAsync();
-            //_context.Remove<UserTeams>(userTeam);
-            //await _context.SaveChangesAsync();
+            _context.UserTeams.Remove(team);
+            await _context.SaveChangesAsync();
         }
-
 
         public async Task CreateNewTeam(UserTeams userTeam)
         {

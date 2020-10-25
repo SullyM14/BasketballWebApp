@@ -3,9 +3,15 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style type="text/css">
 
-<h1>Welcome Back to Fanatsy Basketball, @ViewBag.UserName</h1>
-
+    *{
+        background-size: cover;
+        text-align: center;
+        color:white;
+    }
+</style>
+<h1>Welcome Back to Fanatasy Basketball, @ViewBag.UserName</h1>
 <p>
     <a asp-action="Create">Create New Fantasy Team</a>
 </p>

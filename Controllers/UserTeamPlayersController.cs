@@ -24,6 +24,7 @@ namespace BasketballWebApp.Controllers
             var userTeamPlayers = _crud.RetrieveUserTeamsPlayers(id);
             ViewData["UserTeamIdInt"] = _crud.RetrieveUserTeam(id).FirstOrDefault().UserTeamId;
             ViewData["Budget"] = $"£{_crud.RetrieveUserTeam(id).FirstOrDefault().Budget}0";
+            ViewData["UserTeamName"] = _crud.RetrieveUserTeam(id).FirstOrDefault().TeamName;
             return View(await userTeamPlayers.ToListAsync());
         }
 
@@ -37,7 +38,8 @@ namespace BasketballWebApp.Controllers
                 Text = p.FirstName + " " + p.LastName + ": £" + p.Price + "0",
                 Value = p.PlayerId.ToString()
             });
-           ViewData["UserTeamId"] = new SelectList(_crud.RetrieveUserTeam(id), "UserTeamId", "TeamName");
+            ViewData["UserTeamName"] = _crud.RetrieveUserTeam(id).FirstOrDefault().TeamName;
+            ViewData["UserTeamId"] = new SelectList(_crud.RetrieveUserTeam(id), "UserTeamId", "TeamName");
             ViewData["UserTeamIdInt"] = _crud.RetrieveUserTeam(id).FirstOrDefault().UserTeamId;
             return View();
         }
@@ -56,6 +58,7 @@ namespace BasketballWebApp.Controllers
             }
             ViewData["Budget"] = $"£{_crud.RetrieveUserTeam(userTeamPlayers.UserTeamId).FirstOrDefault().Budget}0";
             ViewData["PlayerId"] = new SelectList(_crud.RetrievePlayers(), "PlayerId", "FirstName", "LastName");
+            ViewData["UserTeamName"] = _crud.RetrieveUserTeam(userTeamPlayers.UserTeamId).FirstOrDefault().TeamName;
             ViewBag.PlayerId = _crud.RetrievePlayers().Select(p => new SelectListItem
             {
                 Text = p.FirstName + " " + p.LastName + ": £" + p.Price + "0",
@@ -79,6 +82,8 @@ namespace BasketballWebApp.Controllers
             {
                 return NotFound();
             }
+            ViewData["UserTeamName"] = _crud.RetrieveUserTeam(userTeamPlayers.UserTeamId).FirstOrDefault().TeamName;
+            ViewData["UserTeamIdInt"] = userTeamPlayers.UserTeamId;
             return View(userTeamPlayers);
         }
 
@@ -92,95 +97,5 @@ namespace BasketballWebApp.Controllers
            // return RedirectToAction(nameof(Index));
         }
 
-        //// GET: UserTeamPlayers/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var userTeamPlayers = await _context.UserTeamPlayers.FindAsync(id);
-        //    if (userTeamPlayers == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    ViewData["PlayerId"] = new SelectList(_context.Players, "PlayerId", "FirstName", userTeamPlayers.PlayerId);
-        //    ViewData["UserTeamId"] = new SelectList(_context.UserTeams, "UserTeamId", "TeamName", userTeamPlayers.UserTeamId);
-        //    return View(userTeamPlayers);
-        //}
-
-        //// POST: UserTeamPlayers/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("UserTeamId,PlayerId,Id")] UserTeamPlayers userTeamPlayers)
-        //{
-        //    if (id != userTeamPlayers.Id)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(userTeamPlayers);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!UserTeamPlayersExists(userTeamPlayers.Id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["PlayerId"] = new SelectList(_context.Players, "PlayerId", "FirstName", userTeamPlayers.PlayerId);
-        //    ViewData["UserTeamId"] = new SelectList(_context.UserTeams, "UserTeamId", "TeamName", userTeamPlayers.UserTeamId);
-        //    return View(userTeamPlayers);
-        //}
-
-        //// GET: UserTeamPlayers/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var userTeamPlayers = await _context.UserTeamPlayers
-        //        .Include(u => u.Player)
-        //        .Include(u => u.UserTeam)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (userTeamPlayers == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(userTeamPlayers);
-        //}
-
-        //// POST: UserTeamPlayers/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var userTeamPlayers = await _context.UserTeamPlayers.FindAsync(id);
-        //    _context.UserTeamPlayers.Remove(userTeamPlayers);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //private bool UserTeamPlayersExists(int id)
-        //{
-        //    return _context.UserTeamPlayers.Any(e => e.Id == id);
-        //}
     }
 }

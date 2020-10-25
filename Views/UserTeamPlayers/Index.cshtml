@@ -4,11 +4,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>@ViewBag.UserTeamName</h1>
 
 <p>
-    <a asp-action="Create" asp-route-id="@ViewBag.UserTeamIdInt">Create New</a>
-    <div class="form-group">
+    <a asp-action="Create" asp-route-id="@ViewBag.UserTeamIdInt">Add Players</a>
+    <div class="form-group" style="float:right">
        Budget: @Html.Label("Budget", (string)ViewBag.Budget)
     </div>
 </p>
@@ -78,8 +78,7 @@
                     @Html.DisplayFor(modelItem => item.Player.Price)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Remove Player</a>
                 </td>
             </tr>
         }

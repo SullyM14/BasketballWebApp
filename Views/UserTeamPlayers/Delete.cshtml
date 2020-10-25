@@ -4,11 +4,8 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete this player from @ViewBag.UserTeamName</h3>
 <div>
-    <h4>UserTeamPlayers</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -29,6 +26,6 @@
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="UserTeamId"/>
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a  asp-action="Index" asp-route-id="@ViewBag.UserTeamIdInt">Back to List</a>
     </form>
 </div>
