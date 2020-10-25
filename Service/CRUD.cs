@@ -175,6 +175,11 @@ namespace BasketballBusinessLayer
             _context.UserTeamPlayers.Remove(userTeamPlayers);
             await _context.SaveChangesAsync();
         }
+
+        public string RetrieveUserName(int id)
+        {
+            return _context.Users.Where(u => u.UserId == 1).FirstOrDefault().FirstName;
+        }
     }
 }
 

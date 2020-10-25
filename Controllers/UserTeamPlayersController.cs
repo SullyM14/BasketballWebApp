@@ -22,14 +22,15 @@ namespace BasketballWebApp.Controllers
         public async Task<IActionResult> Index(int? id)
         {
             var userTeamPlayers = _crud.RetrieveUserTeamsPlayers(id);
-
+            ViewData["UserTeamIdInt"] = _crud.RetrieveUserTeam(id).FirstOrDefault().UserTeamId;
+            ViewData["Budget"] = $"£{_crud.RetrieveUserTeam(id).FirstOrDefault().Budget}0";
             return View(await userTeamPlayers.ToListAsync());
         }
 
         // GET: UserTeamPlayers/Create/5
         public IActionResult Create(int? id)
         {
-            ViewData["Budget"] = _crud.RetrieveUserTeam(id).FirstOrDefault().Budget.ToString();
+            ViewData["Budget"] = $"£{_crud.RetrieveUserTeam(id).FirstOrDefault().Budget}0";
             ViewData["PlayerId"] = new SelectList(_crud.RetrievePlayers(), "PlayerId", "FirstName", "LastName");
             ViewBag.PlayerId = _crud.RetrievePlayers().Select(p => new SelectListItem
             {
@@ -53,7 +54,7 @@ namespace BasketballWebApp.Controllers
                 await _crud.AddPlayer(userTeamPlayers);
                 return RedirectToAction("Index", new { id = userTeamPlayers.UserTeamId });
             }
-            ViewData["Budget"] = _crud.RetrieveUserTeam(userTeamPlayers.UserTeamId).FirstOrDefault().Budget.ToString();
+            ViewData["Budget"] = $"£{_crud.RetrieveUserTeam(userTeamPlayers.UserTeamId).FirstOrDefault().Budget}0";
             ViewData["PlayerId"] = new SelectList(_crud.RetrievePlayers(), "PlayerId", "FirstName", "LastName");
             ViewBag.PlayerId = _crud.RetrievePlayers().Select(p => new SelectListItem
             {
@@ -78,18 +79,17 @@ namespace BasketballWebApp.Controllers
             {
                 return NotFound();
             }
-
             return View(userTeamPlayers);
         }
 
         // POST: UserTeamPlayers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int? id)
+        public async Task<IActionResult> DeleteConfirmed(int? id, int? userTeamId)
         {
             await _crud.RemoveUserPlayer(id);
-
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", new {id = userTeamId});
+           // return RedirectToAction(nameof(Index));
         }
 
         //// GET: UserTeamPlayers/Edit/5

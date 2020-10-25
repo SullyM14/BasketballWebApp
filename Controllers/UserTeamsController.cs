@@ -23,6 +23,7 @@ namespace BasketballWebApp.Controllers
         public async Task<IActionResult> Index()
         {
             var fantasyTeam = _crud.AllUserTeams();
+            ViewData["UserName"] = _crud.RetrieveUserName(1);
             return View(await fantasyTeam.ToListAsync());
         }
 

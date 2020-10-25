@@ -19,6 +19,7 @@ namespace BasketballWebApp.Service
         Task RemoveUserTeam(int? id);
         Task CreateNewTeam(UserTeams userTeam);
         Task AddPlayer(UserTeamPlayers userTeamPlayers);
+        string RetrieveUserName(int id);
         int GetUserTeamID(int? id);
         IEnumerable<Players> RetrievePlayers();
         IEnumerable<UserTeams> RetrieveUserTeam(int? id);
