@@ -26,31 +26,18 @@ namespace BasketballWebApp.Controllers
             return View(await userTeamPlayers.ToListAsync());
         }
 
-        //// GET: UserTeamPlayers/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var userTeamPlayers = await _context.UserTeamPlayers
-        //        .Include(u => u.Player)
-        //        .Include(u => u.UserTeam)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (userTeamPlayers == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(userTeamPlayers);
-        //}
-
         // GET: UserTeamPlayers/Create/5
         public IActionResult Create(int? id)
         {
+            ViewData["Budget"] = _crud.RetrieveUserTeam(id).FirstOrDefault().Budget.ToString();
             ViewData["PlayerId"] = new SelectList(_crud.RetrievePlayers(), "PlayerId", "FirstName", "LastName");
-            ViewData["UserTeamId"] = new SelectList(_crud.RetrieveUserTeam(id), "UserTeamId", "TeamName");
+            ViewBag.PlayerId = _crud.RetrievePlayers().Select(p => new SelectListItem
+            {
+                Text = p.FirstName + " " + p.LastName + ": £" + p.Price + "0",
+                Value = p.PlayerId.ToString()
+            });
+           ViewData["UserTeamId"] = new SelectList(_crud.RetrieveUserTeam(id), "UserTeamId", "TeamName");
+            ViewData["UserTeamIdInt"] = _crud.RetrieveUserTeam(id).FirstOrDefault().UserTeamId;
             return View();
         }
 
@@ -64,11 +51,45 @@ namespace BasketballWebApp.Controllers
             if (ModelState.IsValid)
             {
                 await _crud.AddPlayer(userTeamPlayers);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { id = userTeamPlayers.UserTeamId });
             }
+            ViewData["Budget"] = _crud.RetrieveUserTeam(userTeamPlayers.UserTeamId).FirstOrDefault().Budget.ToString();
             ViewData["PlayerId"] = new SelectList(_crud.RetrievePlayers(), "PlayerId", "FirstName", "LastName");
+            ViewBag.PlayerId = _crud.RetrievePlayers().Select(p => new SelectListItem
+            {
+                Text = p.FirstName + " " + p.LastName + ": £" + p.Price + "0",
+                Value = p.PlayerId.ToString()
+            });
             ViewData["UserTeamId"] = new SelectList(_crud.RetrieveUserTeam(userTeamPlayers.UserTeamId), "UserTeamId", "TeamName");
+
             return View(userTeamPlayers);
+        }
+
+        // GET: UserTeamPlayers/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var userTeamPlayers = await _crud.RetrieveUserPlayer(id);
+            if (userTeamPlayers == null)
+            {
+                return NotFound();
+            }
+
+            return View(userTeamPlayers);
+        }
+
+        // POST: UserTeamPlayers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int? id)
+        {
+            await _crud.RemoveUserPlayer(id);
+
+            return RedirectToAction(nameof(Index));
         }
 
         //// GET: UserTeamPlayers/Edit/5

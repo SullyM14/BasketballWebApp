@@ -107,7 +107,7 @@ namespace BasketballBusinessLayer
                     if (CheckBudget(team.Budget, player.Price) == true)
                     {
                         //Update budget and then add the player
-                        team.Budget = team.Budget - player.Price;
+                        team.Budget -= player.Price;
                         _context.UserTeams.Where(ut => ut.UserTeamId == team.UserTeamId);
                         await _context.SaveChangesAsync();
 
@@ -151,6 +151,29 @@ namespace BasketballBusinessLayer
         public IEnumerable<UserTeams> RetrieveUserTeam(int? id)
         {
             return _context.UserTeams.Where(ut => ut.UserTeamId == id).ToList();
+        }
+
+        public async Task<UserTeamPlayers> RetrieveUserPlayer(int? id)
+        {
+            var userTeamPlayers = await _context.UserTeamPlayers
+                                    .Include(u => u.Player)
+                                    .Include(u => u.UserTeam)
+                                    .FirstOrDefaultAsync(m => m.Id == id);
+
+            return userTeamPlayers;
+        }
+
+        public async Task RemoveUserPlayer(int? id)
+        {
+
+            var userTeamPlayers = await _context.UserTeamPlayers.FindAsync(id);
+            var player = _context.Players.Where(p => p.PlayerId == userTeamPlayers.PlayerId).FirstOrDefault();
+            var team = _context.UserTeams.Where(u => u.UserTeamId == userTeamPlayers.UserTeamId).FirstOrDefault();
+            team.Budget += player.Price;
+            _context.UserTeams.Update(team);
+            await _context.SaveChangesAsync();
+            _context.UserTeamPlayers.Remove(userTeamPlayers);
+            await _context.SaveChangesAsync();
         }
     }
 }
