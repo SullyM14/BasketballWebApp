@@ -10,15 +10,19 @@
         text-align: center;
         color: white
     }
+
     a {
         color: white;
+    }
+    #budgetLabel{
+       font-size:larger
     }
 </style>
 <h1>@ViewBag.UserTeamName</h1>
 
 <p style="display:inline">
-    <a class ="btn btn-success" style="float:right" asp-action="Create" asp-route-id="@ViewBag.UserTeamIdInt">Add New Player</a>
-    <div class="form-group" style="float:left">
+    <a class="btn btn-success" style="float:right" asp-action="Create" asp-route-id="@ViewBag.UserTeamIdInt">Add New Player</a>
+    <div id="budgetLabel" class="form-group" style="float:left">
         Budget: @Html.Label("Budget", (string)ViewBag.Budget)
     </div>
 </p>
@@ -79,12 +83,14 @@
                     @Html.DisplayFor(modelItem => item.Player.Position)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Player.Price)
+                    £@Html.DisplayFor(modelItem => item.Player.Price)
                 </td>
                 <td>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Remove Player</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Remove Player</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<a class="btn btn-light" asp-controller="Userteams" asp-action="Index">Back to All Teams</a>
+

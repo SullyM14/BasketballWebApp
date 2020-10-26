@@ -78,6 +78,7 @@ namespace BasketballBusinessLayer
 
         public async Task CreateNewTeam(UserTeams userTeam)
         {
+            userTeam.Budget = 100;
             _context.Add(userTeam);
             await _context.SaveChangesAsync();
         }

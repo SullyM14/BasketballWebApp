@@ -54,8 +54,8 @@
                 @Html.DisplayFor(modelItem => item.User.FirstName)
             </td>
             <td>
-                <a asp-controller="UserTeamPlayers" asp-action="Index" asp-route-id="@item.UserTeamId">View Fantasy Team</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserTeamId">Delete</a>
+                <a class="btn btn-success" asp-controller="UserTeamPlayers" asp-action="Index" asp-route-id="@item.UserTeamId">View Fantasy Team</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.UserTeamId">Delete</a>
             </td>
         </tr>
 }

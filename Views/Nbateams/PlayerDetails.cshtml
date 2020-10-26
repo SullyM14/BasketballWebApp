@@ -16,9 +16,8 @@
 </style>
 <h1>@Model.ToString()</h1>
 
-<div>
-    <hr />
-    <dl class="row" style="">
+
+    <dl class="row justify-content-center">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Age)
         </dt>
@@ -59,12 +58,11 @@
             @Html.DisplayNameFor(model => model.Price)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Price)
+            £@Html.DisplayFor(model => model.Price)
         </dd>
     </dl>
-</div>
 <div>
-    <a asp-action="Players" asp-route-id="@Model.TeamId">Back to Team Players</a>
+    <a class="btn btn-light" asp-action="Players" asp-route-id="@Model.TeamId">Back to Team Players</a>
 </div>
 
 

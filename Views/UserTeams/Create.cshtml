@@ -13,11 +13,10 @@
     }
 </style>
 
-<h1>Create</h1>
+<h1 style="text-align:center">Create New Fantasy Team</h1>
 
-<h4>UserTeams</h4>
 <hr />
-<div class="row">
+<div class="row justify-content-center" style="text-align:center">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -27,24 +26,19 @@
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Budget" class="control-label"></label>
-                <input asp-for="Budget" class="form-control" />
-                <span asp-validation-for="Budget" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="TeamName" class="control-label"></label>
                 <input asp-for="TeamName" class="form-control" />
                 <span asp-validation-for="TeamName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group" style="text-align:center">
+                <input type="submit" value="Create Team" class="btn btn-success"/>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div style="text-align:center">
+    <a class="btn btn-light" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

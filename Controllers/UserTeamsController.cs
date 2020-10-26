@@ -65,7 +65,7 @@ namespace BasketballWebApp.Controllers
          //more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserTeamId, UserId, TeamName, Budget")] UserTeams userTeam)
+        public async Task<IActionResult> Create([Bind("UserTeamId, UserId, TeamName")] UserTeams userTeam)
         {
             if (ModelState.IsValid)
             {
