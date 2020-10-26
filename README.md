@@ -31,12 +31,10 @@ In the first Sprint, I want to get the project board made, have the GitHub repo 
 ## Output of Sprint Review
 
 ### Beginning of Sprint 1
-![Sprint1Beginning](\BasketballWebApp\Sprint1Beginning.PNG)
-![image-20201025214034304](C:\Users\miahs\source\repos\BasketballWebApp\SprintImages\Sprint1Beginning)
+![Sprint1Beginning](Sprint1Beginning)
 
 ### Sprint 1 End
-
-![Sprint1End](C:\Users\miahs\source\repos\BasketballWebApp\SprintImages\Sprint1End.png)
+![Sprint1End](Sprint1End)
 
 ## Sprint Retrospective
 
@@ -66,12 +64,10 @@ Build on the app made in Sprint 1 and create an MVP with most functionality comp
 ## Output of Sprint Review
 
 ### Sprint 2 Beginning
-
-![Sprint2Beginning](C:\Users\miahs\source\repos\BasketballWebApp\SprintImages\Sprint2Beginning.png)
+![Sprint2Beginning](Sprint2Beginning.png)
 
 ### Sprint 2 End
-
-![Sprint2End](C:\Users\miahs\source\repos\BasketballWebApp\SprintImages\Sprint2End.png)
+![Sprint2End](Sprint2End.png)
 
 ## Sprint Retrospective
 
@@ -86,17 +82,16 @@ Build on the app made in Sprint 1 and create an MVP with most functionality comp
 ## Class Diagrams and Main Differences between Old Project and New One
 
 ### Models Class Diagram
+![ModelsClassDiagram](ClassDiagram Models.png)
 
-![ClassDiagram Models](C:\Users\miahs\source\repos\BasketballWebApp\SprintImages\ClassDiagram Models.png)
 
 ### Controller Class Diagram
 
-![ControllersClassDiagram](C:\Users\miahs\source\repos\BasketballWebApp\SprintImages\ControllersClassDiagram.png)
+![ControllerClassDiagram](ControllersClassDiagram.png)
 
 ### Services Class Diagram
 
-![ServiceClassDiagram](C:\Users\miahs\source\repos\BasketballWebApp\SprintImages\ServiceClassDiagram.png)
-
+![ServiceClassDiagram](ServiceClassDiagram.png)
 
 
 - The biggest difference is the structure used to make this application. 
