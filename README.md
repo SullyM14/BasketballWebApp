@@ -31,7 +31,7 @@ In the first Sprint, I want to get the project board made, have the GitHub repo 
 ## Output of Sprint Review
 
 ### Beginning of Sprint 1
-![Sprint1Beginning](\BasketballWebApp\Sprint1Beginning.PNG)
+![Sprint1Beginning](Sprint1Beginning.PNG)
 ![image-20201025214034304](C:\Users\miahs\source\repos\BasketballWebApp\SprintImages\Sprint1Beginning)
 
 ### Sprint 1 End
