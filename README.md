@@ -34,7 +34,7 @@ In the first Sprint, I want to get the project board made, have the GitHub repo 
 ![Sprint1Beginning](Sprint1Beginning)
 
 ### Sprint 1 End
-![Sprint1End](Sprint1End)
+![Sprint1End](Sprint1End.png)
 
 ## Sprint Retrospective
 
@@ -82,7 +82,7 @@ Build on the app made in Sprint 1 and create an MVP with most functionality comp
 ## Class Diagrams and Main Differences between Old Project and New One
 
 ### Models Class Diagram
-![ModelsClassDiagram](ClassDiagram Models.png)
+![ModelsClassDiagram](ClassDiagramModels.png)
 
 
 ### Controller Class Diagram
