@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BasketballWebApp.Models;
 using BasketballWebApp.Service;
+using BasketballBusinessLayer;
+using System.Security.Principal;
 
 namespace BasketballWebApp.Controllers
 {
@@ -53,8 +55,16 @@ namespace BasketballWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _crud.AddPlayer(userTeamPlayers);
-                return RedirectToAction("Index", new { id = userTeamPlayers.UserTeamId });
+                try
+                {
+                    await _crud.AddPlayer(userTeamPlayers);
+                    return RedirectToAction("Index", new { id = userTeamPlayers.UserTeamId });
+                }
+                catch (OutOfBudgetException)
+                {
+                    ViewData["Error"] = "Out of Budget";
+                    return RedirectToAction("Error","Home");
+                }
             }
             ViewData["Budget"] = $"£{_crud.RetrieveUserTeam(userTeamPlayers.UserTeamId).FirstOrDefault().Budget}0";
             ViewData["PlayerId"] = new SelectList(_crud.RetrievePlayers(), "PlayerId", "FirstName", "LastName");

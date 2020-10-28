@@ -18,7 +18,7 @@ namespace BasketballWebApp.Models
 
         [Display(Name = "User ID")]
         public int UserId { get; set; }
-        public decimal Budget { get; set; }
+        public decimal Budget { get; set; } = 100;
 
 
         [Display(Name = "Team Name")]

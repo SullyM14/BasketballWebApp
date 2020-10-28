@@ -44,14 +44,13 @@ namespace BasketballWebApp.Controllers
             return View(userTeam);
         }
 
-        // POST: Userteams/Delete/5
+        // POST: UserTeams/Delete/16011
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int? id)
         {
             _crud.RemoveUserTeam(id);
             return RedirectToAction(nameof(Index));
-            //return RedirectToAction(nameof(Index));
         }
 
         // GET: Userteams/Create
